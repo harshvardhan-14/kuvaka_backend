@@ -8,7 +8,7 @@ class AIService {
     if (!this.apiKey) {
       throw new Error('need GEMINI_API_KEY in .env');
     }
-    
+    // i have used gemini-1.5-flash model because gemini-1.5-pro is not available for free tier
     this.genAI = new GoogleGenerativeAI(this.apiKey);
     this.model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
     

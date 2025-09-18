@@ -1,6 +1,6 @@
 const AIService = require('./aiService');
 
-// scoring service - rules + ai
+// scoring service - rules + ai added
 class ScoringService {
   constructor() {
     this.aiService = new AIService();
