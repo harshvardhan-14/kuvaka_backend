@@ -1,0 +1,198 @@
+LEAD SCORING API - CODE EXPLANATION
+===================================
+
+Hi! I'm a fresher developer and I built this lead scoring API. Let me explain how it works in simple terms.
+
+WHAT IS THIS?
+=============
+This is a simple API that scores leads (potential customers) using AI. You give it:
+1. Your product details
+2. A CSV file with leads
+3. It scores each lead and tells you which ones are most likely to buy
+
+HOW TO RUN IT
+=============
+
+1. Install dependencies:
+   npm install
+
+2. Set up environment:
+   cp env.example .env
+   (Then edit .env and add your Gemini API key)
+
+3. Start the server:
+   npm start
+
+4. Test it works:
+   curl http://localhost:3000/health
+
+HOW TO TEST MANUALLY
+===================
+
+Step 1: Save your product
+curl -X POST http://localhost:3000/api/offer \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "AI Sales Tool",
+    "value_props": ["Saves time", "More meetings"],
+    "ideal_use_cases": ["B2B companies", "Sales teams"]
+  }'
+
+Expected: {"message": "Offer saved successfully!", "offer": {...}}
+
+Step 2: Upload CSV with leads
+Create a CSV file like this:
+name,role,company,industry,location,linkedin_bio
+John Doe,CEO,TechCorp,Technology,San Francisco,Tech leader
+Jane Smith,Marketing Manager,GrowthCo,B2B SaaS,New York,Marketing expert
+
+Then upload:
+curl -X POST http://localhost:3000/api/leads/upload -F "leads=@your-file.csv"
+
+Expected: {"message": "Leads uploaded successfully!", "count": 2, "leads": [...]}
+
+Step 3: Score the leads
+curl -X POST http://localhost:3000/api/score
+
+Expected: {"message": "Scoring completed!", "summary": {...}, "results": [...]}
+
+Step 4: Get results
+curl http://localhost:3000/api/results
+
+Expected: Same as step 3 but just the results
+
+Step 5: Export as CSV
+curl http://localhost:3000/api/results/export/csv -o results.csv
+
+Expected: Downloads a CSV file with all results
+
+WHAT EACH FILE DOES
+==================
+
+src/app.js - Main server file
+- Sets up Express server
+- Handles basic middleware (CORS, JSON parsing)
+- Connects all the routes
+- Simple error handling
+
+src/routes/offer.js - Product/offer routes
+- POST /api/offer - Save product details
+- GET /api/offer - Get saved product details
+- Basic validation (checks required fields)
+
+src/routes/leads.js - CSV upload routes
+- POST /api/leads/upload - Upload CSV file
+- GET /api/leads - Get uploaded leads
+- GET /api/leads/sample - Show CSV format example
+- Uses multer for file uploads
+
+src/routes/score.js - Scoring routes
+- POST /api/score - Score all leads
+- Checks if offer and leads exist first
+- Calls the scoring service
+- Returns results with summary
+
+src/routes/results.js - Results routes
+- GET /api/results - Get all results
+- GET /api/results/export/csv - Download as CSV
+- Simple CSV generation
+
+src/services/storage.js - Data storage
+- Simple in-memory storage (like a mini database)
+- Stores offer, leads, and results
+- In production, you'd use MongoDB or PostgreSQL
+
+src/services/aiService.js - AI integration
+- Talks to Google Gemini AI
+- Sends lead + offer info to AI
+- AI returns intent (High/Medium/Low) and reasoning
+- If AI fails, returns default "Low" score
+
+src/services/scoringService.js - Scoring logic
+- Combines rule-based scoring + AI scoring
+- Rule-based: Role (20pts), Industry (20pts), Data completeness (10pts)
+- AI-based: High=50pts, Medium=30pts, Low=10pts
+- Final score = Rule score + AI score (0-100)
+
+HOW SCORING WORKS
+================
+
+Rule-based scoring (50 points max):
+- Role: CEO/CTO/Manager = 20 points, Senior/Specialist = 10 points
+- Industry match: Exact match = 20 points, Related = 10 points
+- Data completeness: All fields filled = 10 points
+
+AI scoring (50 points max):
+- Uses Google Gemini to analyze the lead
+- High intent = 50 points, Medium = 30 points, Low = 10 points
+
+Final score:
+- 70-100 = High intent
+- 40-69 = Medium intent
+- 0-39 = Low intent
+
+WHY I MADE THESE CHOICES
+========================
+
+1. Express.js - Most popular Node.js framework, easy to learn
+2. In-memory storage - Simple for demo, no database setup needed
+3. Google Gemini - Good AI model, easy to use
+4. CSV uploads - Common format, easy to work with
+5. Simple error handling - Not over-engineered
+6. Basic validation - Just enough to prevent crashes
+
+WHAT'S GOOD ABOUT THIS CODE
+===========================
+
+- Simple and readable
+- Good separation of concerns (routes, services, storage)
+- Basic error handling
+- Input validation
+- Clear comments
+- Easy to understand and modify
+
+WHAT COULD BE BETTER
+====================
+
+- Use a real database instead of in-memory storage
+- Add more validation
+- Better error messages
+- Add authentication
+- More comprehensive testing
+- Better logging
+
+But for a fresher project, this is pretty good! 😊
+
+HOW TO DEPLOY
+=============
+
+You can deploy this to:
+- Railway (easiest)
+- Render
+- Heroku
+- Vercel
+
+Just make sure to set the GEMINI_API_KEY environment variable.
+
+TESTING
+=======
+
+Run tests:
+npm test
+
+The tests check:
+- Storage service works correctly
+- Scoring logic gives right scores
+- Error handling works
+
+NOTES
+=====
+
+- Data is lost when server restarts (in-memory storage)
+- Need valid Gemini API key
+- CSV files limited to 5MB
+- Files are cleaned up automatically after upload
+
+This is a simple but working lead scoring API. Perfect for learning and understanding how APIs work with AI integration!
+
+Made with ❤️ by a fresher developer
