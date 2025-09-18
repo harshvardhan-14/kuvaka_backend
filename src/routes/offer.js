@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const storageService = require('../services/storage');
 
-// Save product/offer info
+// Save product or offer info
 router.post('/', (req, res) => {
   try {
     const { name, value_props, ideal_use_cases } = req.body;

@@ -67,7 +67,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Calculate summary stats
+// Calculate summary stats from results
 function calculateSummary(results) {
   if (!results || results.length === 0) {
     return {
