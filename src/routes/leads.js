@@ -42,7 +42,7 @@ router.post('/upload', upload.single('leads'), async (req, res) => {
           };
           
           // Only save leads with name and company
-          if (lead.name && lead.company) {
+          if (lead.name && lead.company ) {
             leads.push(lead);
           }
         })
@@ -64,7 +64,7 @@ router.post('/upload', upload.single('leads'), async (req, res) => {
       });
     }
     
-    // Save leads
+    // Save leads to storage
     const savedLeads = storageService.setLeads(leads);
     
     res.status(201).json({
