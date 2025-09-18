@@ -1,6 +1,6 @@
 # Lead Scoring API
 
-A simple API that scores leads using AI. Made by a fresher developer! 😊
+A simple API that scores leads using AI. Made by Harshvardhan Singh ! 😊
 
 ## What it does
 
@@ -13,28 +13,24 @@ This API helps you score leads (potential customers) by:
 ## How to run
 
 1. **Install dependencies**
-   ```bash
+   
    npm install
-   ```
+   
 
 2. **Set up environment**
-   ```bash
-   cp env.example .env
-   ```
-   Then edit `.env` and add your Gemini API key:
-   ```
+   
    GEMINI_API_KEY=your_api_key_here
-   ```
+   
 
 3. **Start the server**
-   ```bash
+   
    npm start
-   ```
+   
 
 4. **Test it works**
-   ```bash
-   curl http://localhost:3000/health
-   ```
+   
+    http://localhost:3000/health
+   
 
 ## API Endpoints
 
@@ -53,7 +49,7 @@ This API helps you score leads (potential customers) by:
 ## How to test manually
 
 ### Step 1: Save your product
-```bash
+```
 curl -X POST http://localhost:3000/api/offer \
   -H "Content-Type: application/json" \
   -d '{
@@ -199,13 +195,10 @@ docker-compose up
 
 ## Deployment
 
-You can deploy this to:
-- Railway (easiest)
-- Render
-- Heroku
-- Vercel
+I have deployed using
+- Railway 
 
-Just make sure to set the `GEMINI_API_KEY` environment variable.
+
 
 ## Files in this project
 
@@ -231,4 +224,4 @@ src/
 - CSV files are limited to 5MB
 - All file uploads are cleaned up automatically
 
-Made with ❤️ by a fresher developer!
+Made by Harshvardhan Singh
