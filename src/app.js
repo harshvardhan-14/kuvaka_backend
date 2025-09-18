@@ -66,7 +66,7 @@ app.use((err, req, res, next) => {
 // start server
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
-  console.log('health: http://localhost:3000/health');
+  
 });
 
 module.exports = app;

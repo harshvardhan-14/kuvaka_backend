@@ -54,6 +54,7 @@ describe('ScoringService', () => {
       expect(score).toBeGreaterThanOrEqual(20); // Industry match
     });
 
+    // Test data are taken from mock website
     test('should score data completeness correctly', () => {
       const lead = {
         name: 'John Doe',

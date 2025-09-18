@@ -93,7 +93,7 @@ describe('StorageService', () => {
         { name: 'John Doe', role: 'CEO', company: 'TechCorp', industry: 'Tech', location: 'SF' }
       ];
 
-      const leads2 = [
+      const leads2 = [  
         { name: 'Jane Smith', role: 'CTO', company: 'StartupCo', industry: 'SaaS', location: 'NY' }
       ];
 

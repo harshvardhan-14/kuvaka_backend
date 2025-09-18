@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
   }
 });
 
-// Export results as CSV
+// Export results as CSV files
 router.get('/export/csv', (req, res) => {
   try {
     const results = storageService.getResults();
