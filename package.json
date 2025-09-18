@@ -1,0 +1,29 @@
+{
+  "name": "lead-scoring-backend",
+  "version": "1.0.0",
+  "description": "Simple lead scoring API with AI",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "jest"
+  },
+  "keywords": ["lead-scoring", "ai", "backend"],
+  "author": "Fresher Developer",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "csv-parser": "^3.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "@google/generative-ai": "^0.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "jest": "^29.7.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
